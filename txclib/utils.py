@@ -317,8 +317,8 @@ def parse_tx_response(response, skip_decode):
         elif response.status == 404:
             raise HttpNotFound(data)
         elif response.status >= 500:
-            msg = "Failed to connect. Server responded with HTTP code {}"
-            raise TXConnectionError(msg.format(response.status),
+            msg = "Failed to connect. Server responded with HTTP code {} and body {}"
+            raise TXConnectionError(msg.format(response.status, response.body),
                                     code=response.status)
         else:
             raise Exception("Error received from server: {}".format(data))
